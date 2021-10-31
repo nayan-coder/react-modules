@@ -1,0 +1,359 @@
+<html lang="pt-br">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel='stylesheet' href="../css/all.css">
+    <title>Chat</title>
+
+</head>
+<body>
+
+    <div class="background-wrapper" id="main">
+        
+       
+
+        <nav class= "profile-nav">  <!-- Navbar da esquerda, contém os perfis do usuário e de seus contatos/conversas -->
+
+
+            <div class="profile-nav-header">   <!-- Logo do projeto -->
+                <p>
+                    
+                    <span class="material-icons" id="logo">
+                        maps_ugc
+                    </span>
+                    Chat <span class="p-subtitle">Plus</span>
+
+                </p>
+            </div>
+
+            
+            <div class="user-profile"> <!-- Área do perfil do usuário -->
+
+                <div class="user-profile-img"  onclick="changeProfilePic()">
+
+                    
+                    <span class="material-icons" id="change-profile-pic">
+                            photo_camera
+                    </span>
+                    
+
+                </div>
+
+                <p class="user-profile-name" id="user-name"> <!-- Display das informações do usuário -->
+                    
+                    Usuário
+
+                    <p class="user-connection">  <!-- Botão responsável por exibir o status do usuáiro (Online/Offline) -->
+
+                        <span class="material-icons" id="user-connection-icon" onclick="displayUserConnectStat()">
+                            toggle_on
+                        </span>
+                        
+                        <span id="user-profile-name">
+                            Online
+                        </span>
+                    </p>
+                  
+
+                </p>
+
+            </div>
+
+            <div class="user-conversations"> <!-- Área de conversas com contatos do usuário -->
+
+                <div class="conversations-header"> 
+                    <p>
+                        Conversas 
+                    </p>
+                  
+                </div>
+
+                <div class="conversations-main"> <!--Todos as conversas -->
+                    
+
+                   <ul class="conversations-main-list"> <!--Lista de conversas-->
+
+                       <li class="contact-info" id="contact-selected">
+                      
+                            <div class="contact-profile-pic-bckg">
+
+                                <div class="contact-profile-pic"></div>
+
+                            </div>
+                            <div class="contact-text-area">
+                                <p class="contact-name">
+                                    Chat Plus
+                                </p>
+                                <p class="contact-message">
+                                    Olá! 😀😀 Esta é uma interface...
+                                </p>
+                            </div>
+                        
+
+                      
+                       </li>
+
+                       <li class="contact-info"   id= "new-message">
+                        
+                            <div class="contact-profile-pic-bckg">
+
+                                <div class="contact-profile-pic"></div>
+
+                            </div>
+                            <div class="contact-text-area">
+                                <p class="contact-name">
+                                    Contato 1
+                                </p>
+                                <p class="contact-message">
+                                    Mensagem nova!
+                                </p>
+                            </div>
+                                <div class="conversation-notification-bckg">
+                                    <div class="conversation-notification">
+                                    8
+                                    </div>
+                                </div>
+                            
+                  
+                        </li>
+                        <li class="contact-info">
+                        
+                            <div class="contact-profile-pic-bckg">
+
+                                <div class="contact-profile-pic"></div>
+
+                            </div>
+                            <div class="contact-text-area">
+                                <p class="contact-name">
+                                    Contato 2
+                                </p>
+                                <p class="contact-message">
+                                    Nenhuma mensagem nova
+                                </p>
+                            </div>
+                            
+                  
+                        </li>
+                        <li class="contact-info">
+                        
+                            <div class="contact-profile-pic-bckg">
+
+                                <div class="contact-profile-pic"></div>
+
+                            </div>
+                            <div class="contact-text-area">
+                                <p class="contact-name">
+                                    Contato 3
+                                </p>
+                                <p class="contact-message">
+                                    Nenhuma mensagem nova
+                                </p>
+                            </div>
+                            
+                  
+                        </li>
+                        <li class="contact-info">
+                        
+                            <div class="contact-profile-pic-bckg">
+
+                                <div class="contact-profile-pic"></div>
+
+                            </div>
+                            <div class="contact-text-area">
+                                <p class="contact-name">
+                                    Contato 4
+                                </p>
+                                <p class="contact-message">
+                                    Não conversamos muito...
+                                </p>
+                            </div>
+                            
+                  
+                        </li>
+
+                     
+
+                   </ul>
+
+
+
+                </div>
+                
+
+            </div>
+
+
+        </nav>
+
+        <main class="chat-main-wrapper"> <!-- Área do chat -->
+
+            <div class="chat-header"> <!--Informações sobre o contato selecionado para troca de mensagens -->
+
+                <div class="chat-header-contact-master">
+                    <div class="chat-header-contact-profile-pic"></div>
+                   
+                    <div class="chat-header-contact-name">
+                        Chat Plus
+
+                        <div class="chat-header-contact-connection-display">
+                            Online
+                        </div>
+                    </div>
+               
+                </div>
+                <div class="chat-header-contact-actions">
+
+                    <span class="material-icons" id="video-call">
+                        videocam
+                    </span>
+                    <span class="material-icons" id="chat-contact-messages-options">
+                        more_vert
+                    </span>
+
+                </div>
+               
+                
+
+            </div>
+            
+            <div class="chat-conversation-wrapper" id="chat-wrapper"> <!-- Área das mensagens -->
+                <div class="contact-message-wrapper">
+                    <div class="contact-message-box-style"></div> 
+                    <div class="contact-message-box">
+                        <div class="contact-message-box-p">
+                           Olá! &#x1F600;&#x1F600; me chamo Gabriel e sou o desenvolvedor desta página, seja bem-vindo! Esta é uma interface gráfica que simula uma aplicação de um chat via web. O intuito é demonstrar o design e 
+                           interação criados a partir dos meus conhecimentos em HTML, CSS e JavaScript puro.
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-message-wrapper">
+                    <div class="contact-message-box-style"></div> 
+                    <div class="contact-message-box">
+                        <div class="contact-message-box-p">
+                           Aqui você pode interagir com alguns elementos para testar as animações e enviar mensagens e emojis.
+                           Faça um teste! Para mais informações, envie 'saber mais'
+                        </div>
+                    </div>
+                </div>
+                     
+           
+
+
+            </div>
+            
+
+            <div class="chat-user-message-wrapper"> <!-- Área onde o usuário digita as mensagens -->
+
+                <span class="material-icons" id="emoji" onclick="emojiWindow()">
+                    sentiment_satisfied_alt
+                </span>
+
+                <p class="attach-file-wrapper">
+                    
+                    <input type="file" name="attach-file" id="attach-file-input">
+                    <label for="attach-file-input" class="material-icons" id="attach-file" onclick="attachFile()">
+                        attach_file
+                    </label>
+                </p>
+
+               <div class="chat-user-message-form-wrapper">
+                   <input type="text" name="" id="user-message-form" placeholder="Digite sua mensagem aqui">
+               </div>
+
+               <span class="material-icons" id="send-message" onclick="sendMessage()">
+                    send
+               </span>
+               <div class="emojis-wrapper" id="emojis-wrapper"> <!-- Emojis container -->
+                  
+                <ul class="emoji-list">
+
+                <li class="emoji-item" id="grinning-face" onclick="insertEmoji(emojiCode = 1)">&#x1F600;</li>  <!-- grinning face -->
+                <li class="emoji-item" id="grinning-face-with-smiling-eyes" onclick="insertEmoji( emojiCode = 2)">&#x1F604;</li>  <!-- grinning face with smiling eyes -->
+                <li class="emoji-item" id="grinning-face-with-sweat" onclick="insertEmoji( emojiCode =3)">&#x1F605;</li>  <!-- grinning face with sweat -->
+                <li class="emoji-item" id="face-with-tears-of-joy" onclick="insertEmoji( emojiCode =4)">&#x1F602;</li>  <!-- face with tears of joy -->
+                <li class="emoji-item" id="winking-face" onclick="insertEmoji( emojiCode = 5)">&#x1F609;</li>  <!-- winking face --> 
+                <li class="emoji-item" id="face-blowing-a-kiss" onclick="insertEmoji(emojiCode = 6)">&#x1F618;</li>  <!-- face blowing a kiss -->
+                <li class="emoji-item" id="angry-face" onclick="insertEmoji(emojiCode = 7)">&#x1F620;</li>  <!--angry face -->
+                <li class="emoji-item" id="heart" onclick="insertEmoji(emojiCode = 8)">&#x1F49B;</li>  <!-- heart -->
+                <li class="emoji-item" id="thumbs-up" onclick="insertEmoji(emojiCode = 9)">&#x1F44D;</li>  <!-- thumbs up -->
+                <li class="emoji-item" id="thumbs-down" onclick="insertEmoji(emojiCode = 10)">&#x1F44E;</li>  <!-- thumbs down -->
+
+                </ul>
+            </div> 
+                
+            </div>
+     
+
+        </main>
+
+        
+    
+
+    </div>
+
+    <!-- Interfaces adicionais -->
+
+    <div class="select-profile-pic-wrapper" id="select-profile-pic-menu">
+
+       <div class="select-profile-pic" id="select-profile-pic">
+        <p class="select-profile-pic-title">
+            Selecionar imagem de perfil
+            <span class="material-icons" id="close-select-profile-pic-menu" onclick="closeSelectProfilePicMenu()">
+                close
+            </span>
+
+        </p>
+            
+            <div class="select-profile-pic-img-display">
+
+                <div class="select-profile-pic-options">
+              
+                    <label for="select-pic" id="select-pic-btn">Procurar imagem</label>
+                    <input type="file" name="Escolher imagem" id="select-pic" accept="image/*">
+                  
+    
+                </div>
+                
+            </div>
+
+            <div class="select-profile-pic-aplly-options">
+                <input type="button" value="Aplicar" id="cancel-selected-profile-pic">
+                <input type="button" value="Cancelar" id="cancel-selected-profile-pic">
+            </div>
+           
+          
+
+       </div>
+
+
+    </div>
+    
+    <div class="get-started" id="login-screen">
+       <p>
+                    
+                    <span class="material-icons" id="login-logo">
+                        maps_ugc
+                    </span>
+                    Chat <span class="login-p-subtitle">Plus</span>
+                 
+                </p>
+      
+     
+        <input type="text" name="email" id="email" placeholder="Email ou telefone" class="login-form">
+        <input type="password" name="password" id="password" class="login-form" placeholder="Senha">
+        <input type="button" value="Login" class="login-btn" onclick="login()">
+
+    </div>
+  
+
+  
+
+
+    <script src="../js/all.js">
+
+    </script>
+
+</body>
+</html>
