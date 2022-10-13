@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../style.css">    
+</head>
+<body>
+     <!-- Navbar -->
+     <div class="navbar">
+        <a href="../index.html"><h2>Multiple Character Ciphers</h2></a>
+        <a href="https://en.wikipedia.org/wiki/Caesar_cipher" target="_blank"><h2>About Cipher</h2></a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="header">
+            <h1>Caesar Cipher</h1>
+        </div>
+        <div class="form-container">
+            <form id="submitForm" action="#" method="get" onsubmit="return false;">
+                <div class="container">
+                    <label for="plainText"><b>Enter The Message :</b></label>
+                    <input type="text" id="plainText" placeholder="Enter Plain Text" name="plainText" required>
+                    <label for="key"><b>Enter Key (Number of Shifts) :</b></label>
+                    <input type="number" id="key" placeholder="Enter Key" name="key" required>
+                </div>
+                <button class="btn-grad btn-encrypt" onclick="caesarCipher(false)">Encrypt !</button>
+                <button class="btn-grad btn-encrypt" onclick="caesarCipher(true)">Decrypt !</button>
+            </form>
+        </div>
+        <div class="output" id="output" style="text-align: center; font-size: 30px; margin-top: 15px;">
+
+        </div>
+    
+    </div>
+</body>
+<script>
+    // main function
+    function caesarCipher(isDecrypt) {
+        var shiftText = document.getElementById("key").value;
+        if (!/^-?\d+$/.test(shiftText)) {
+            alert("Shift is not an integer");
+            return;
+        }
+        var shift = parseInt(shiftText, 10);
+        if (shift < 0 || shift >= 26) {
+            alert("Shift is out of range");
+            return;
+        }
+        if (isDecrypt)
+            shift = (26 - shift) % 26;
+
+        var plainText = document.getElementById("plainText").value;
+
+        var op = caesarShift(plainText, shift);
+
+        // Rendering Output
+        document.getElementById('output').innerHTML = "Resultant Text is : " + op;
+    }    
+    
+    function caesarShift(text, shift) {
+	var result = "";
+	for (var i = 0; i < text.length; i++) {
+		var c = text.charCodeAt(i);
+		if      (65 <= c && c <=  90) result += String.fromCharCode((c - 65 + shift) % 26 + 65);  // Uppercase
+		else if (97 <= c && c <= 122) result += String.fromCharCode((c - 97 + shift) % 26 + 97);  // Lowercase
+		else                          result += text.charAt(i);  // Copy
+	}
+	return result;
+    }
+</script>
+</html>
