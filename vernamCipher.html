@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vigenere Cipher</title>
+
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="../style.css">
+        
+    <!-- JavaScript plugins (requires jQuery) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+</head>
+<body>
+     <!-- Navbar -->
+     <div class="navbar">
+        <a href="../index.html"><h2>Multiple Character Ciphers</h2></a>
+        <a href="https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher" target="_blank"><h2>About Cipher</h2></a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="header">
+            <h1>Vigenere Cipher</h1>
+        </div> 
+        <div class="form-container">
+            <div class="container">
+                <label for="plaintext"><b>Enter The Message :</b></label>
+                <input type="text" class="form-control" id="plaintext" placeholder="Enter Plain Text">
+                <label for="key"><b>Enter Key (Keyword) :</b></label>
+                <input type="text" class="form-control" id="key" placeholder="Enter an alphabetic key">
+                <button class="btn-grad btn-encrypt" onClick="vigenere()">Encrypt</button>
+
+                <button class="btn-grad btn-encrypt" onClick="devigenere()">Decrypt</button>
+            </div>    
+
+            <!-- Output -->
+            <div class="output" id="output" style="text-align: center; font-size: 30px; margin-top: 15px;">
+            </div>
+        </div>
+    </div>
+    </body>
+    <script type="text/javascript">
+        var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        function cipher(shiftn){
+            var i = 0;
+            var cipher = new Array(26);
+            for (i; i < 26; i++){
+                var index = 0;
+                if ((i + shiftn) > 25){
+                    index = (i + shiftn) % 26;
+                }
+                else {
+                    index = i + shiftn;
+                }
+                cipher[i] = alphabet[index];
+            }
+            return cipher;
+        }
+        
+        function encipherChar(k, p){
+            keyIndex = alphabet.indexOf(k)
+            cipherAlpha = cipher(keyIndex)
+            cipherChar = cipherAlpha[alphabet.indexOf(p)]
+            return cipherChar
+        }
+        
+        function decipherChar(k, c){
+            keyIndex = alphabet.indexOf(k)
+            cipherAlpha = cipher(keyIndex)
+            decipheredChar = alphabet[cipherAlpha.indexOf(c)]
+            return decipheredChar
+        }
+        
+        function encipherMessage(plaintext, key){
+            keyIdx = 0
+            var ciphertext = ""
+            for (var i = 0; i < plaintext.length; i++){
+                if(keyIdx > key.length-1)
+                    keyIdx = 0;
+                keyChar = key[keyIdx]
+                cipherChar = encipherChar(keyChar, plaintext[i])
+                ciphertext = ciphertext + cipherChar
+                keyIdx++
+            }
+            return ciphertext
+        }
+        
+        function decipherMessage(ciphertext, key){
+            keyIdx = 0
+            var plaintext = ""
+            for(var i = 0; i < ciphertext.length; i++){
+                if(keyIdx > key.length-1)
+                    keyIdx = 0;
+                keyChar = key[keyIdx]
+                plainChar = decipherChar(keyChar, ciphertext[i])
+                plaintext = plaintext + plainChar
+                keyIdx++
+            }
+            return plaintext
+        }
+
+        function vigenere(){
+            plaintext = $("#plaintext").val().toLowerCase().replace(/\W/g, '').replace(/[0-9]/g, '')
+            key = $("#key").val().toLowerCase().replace(/\W/g, '').replace(/[0-9]/g, '')
+            ciphertext = encipherMessage(plaintext, key)
+            $("#output").html("Encrypted Text is: " + ciphertext)
+        } 
+        function devigenere(){
+            ciphertext = $("#plaintext").val().toLowerCase().replace(/\W/g, '').replace(/[0-9]/g, '')
+            key = $("#key").val().toLowerCase().replace(/\W/g, '').replace(/[0-9]/g, '')
+            plaintext = decipherMessage(ciphertext, key)
+            $("#output").html("Decrypted text is: " + plaintext)
+        }
+    </script>
+
+</html>
