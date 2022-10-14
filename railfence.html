@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rail Fence Cipher</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="../index.html"><h2>Multiple Character Ciphers</h2></a>
+        <a href="https://en.wikipedia.org/wiki/Rail_fence_cipher" target="_blank"><h2>About Cipher</h2></a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="header">
+            <h1>Rail Fence Cipher</h1>
+        </div> 
+        <div class="form-container">
+            <div class="container">
+                <label for="plaintext"><b>Enter The Message :</b></label>
+                <input type="text" class="form-control" id="plaintext" placeholder="Enter Plain Text">
+                <label for="key"><b>Enter Key (Level) :</b></label>
+                <input type="number" class="form-control" id="key" placeholder="Enter the encryption depth">
+                <button class="btn-grad btn-encrypt" onClick="Encrypt()">Encrypt</button>
+
+                <button class="btn-grad btn-encrypt" onClick="Decrypt()">Decrypt</button>
+            </div>    
+
+            <!-- Output -->
+            <div class="output" id="output" style="text-align: center; font-size: 30px; margin-top: 15px;">
+            </div>
+        </div>
+    </div>
+
+<script>
+    function Encrypt() {
+        plaintext = document
+            .getElementById("plaintext")
+            .value.toLowerCase()
+            .replace(/[^a-z]/g, "");
+        if (plaintext.length < 1) {
+            alert("please enter some plaintext");
+            return;
+        }
+        var key = parseInt(document.getElementById("key").value);
+        if (key > Math.floor(2 * (plaintext.length - 1))) {
+            alert("key is too large for the plaintext length.");
+            return;
+        }
+        ciphertext = "";
+        for (line = 0; line < key - 1; line++) {
+            skip = 2 * (key - line - 1);
+            j = 0;
+            for (i = line; i < plaintext.length; ) {
+                ciphertext += plaintext.charAt(i);
+                if (line == 0 || j % 2 == 0) i += skip;
+                else i += 2 * (key - 1) - skip;
+                j++;
+            }
+        }
+        for (i = line; i < plaintext.length; i += 2 * (key - 1))
+            ciphertext += plaintext.charAt(i);
+        document.getElementById("output").innerHTML = "Encrypted Text is: " + ciphertext;
+    }
+
+    function Decrypt(f) {
+        ciphertext = document
+            .getElementById("plaintext")
+            .value.toLowerCase()
+            .replace(/[^a-z]/g, "");
+        if (ciphertext.length < 1) {
+            alert("please enter some ciphertext (letters only)");
+            return;
+        }
+        var key = parseInt(document.getElementById("key").value);
+        if (key > Math.floor(2 * (ciphertext.length - 1))) {
+            alert("please enter 1 - 22.");
+            return;
+        }
+        pt = new Array(ciphertext.length);
+        k = 0;
+        for (line = 0; line < key - 1; line++) {
+            skip = 2 * (key - line - 1);
+            j = 0;
+            for (i = line; i < ciphertext.length; ) {
+                pt[i] = ciphertext.charAt(k++);
+                if (line == 0 || j % 2 == 0) i += skip;
+                else i += 2 * (key - 1) - skip;
+                j++;
+            }
+        }
+        for (i = line; i < ciphertext.length; i += 2 * (key - 1))
+            pt[i] = ciphertext.charAt(k++);
+        document.getElementById("output").innerHTML = "Decrypted Text is: " + pt.join("");
+    }
+</script>    
+</body>
+</html>
