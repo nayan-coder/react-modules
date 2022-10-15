@@ -1,0 +1,9 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    background-image: url(https://www.hmablogs.com/wp-content/uploads/2021/07/backgroundimg-scaled.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
